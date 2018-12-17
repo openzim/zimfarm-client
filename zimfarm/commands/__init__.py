@@ -11,7 +11,7 @@ processors = {
 
 def main():
     parser = argparse.ArgumentParser(description='Zimfarm Client')
-    subparsers = parser.add_subparsers(dest="sub_parser", help='sub-commands')
+    subparsers = parser.add_subparsers(dest="sub_parser", help='account')
 
     login.register(subparsers.add_parser('login'))
     logout.register(subparsers.add_parser('logout'))
@@ -20,10 +20,12 @@ def main():
 
     sub_parser = args.sub_parser
     processor = processors.get(sub_parser)
-    processor(args)
+
+    if processor is not None:
+        processor(args)
+    else:
+        print("Welcome to Zimfarm")
 
 
 if __name__ == '__main__':
     main()
-
-
