@@ -2,23 +2,23 @@
 
 Zimfarm client provides a way to programmatically interact with Zimfarm services.
 
-## Requirements
+Install with pip: ``pip install zimfarm``
+
+### Requirements
 
 - Python 3.7.0 or up
 - A Internet connection
 - Username and password
 
-## How to run 
+## Account Management
 
-### Option 1: using source code
+Login using your username and password. 
+After successful login, a file named `.zimfarm` will be created in your home directory 
+to store your token info.
 
-1. clone this repository and go into root of the repository
-2. make a virtual environment (optional)
-3. install dependencies: `pip install -r requirements.txt`
-4. set PYTHONPATH environment variable `export PYTHONPATH=$PWD`
-5. start writing code and run them, e.g. `python example/list_wokers.py`
+- login: `zimfarm login username password`
+- logout: `zimfarm logout`
 
-### Option 2: install from pip 
-Coming soon...
+## Schedule
 
-##
+## Worker 
