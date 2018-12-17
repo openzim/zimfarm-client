@@ -1,14 +1,26 @@
 from typing import Optional
+
 import requests
 from requests.auth import AuthBase
+
+from zimfarm.errors import OAuth2Error
 
 
 class Client:
     base = 'https://farm.openzim.org/api'
     access_token: Optional[str] = None
+    refresh_token: Optional[str] = None
 
-    def password_auth(self, username: str, password: str):
-        response = requests.post(f'{self.base}/auth/oauth2', json={
+    @classmethod
+    def password_auth(cls, username: str, password: str) -> (str, str):
+        """Authenticate with username and password
+
+        :param username:
+        :param password:
+        :return access_token, refresh_token: (str, str)
+        """
+
+        response = requests.post(f'{cls.base}/auth/oauth2', json={
             'grant_type': 'password',
             'username': username,
             'password': password
@@ -16,9 +28,11 @@ class Client:
 
         response_json = response.json()
         if response.status_code == 200:
-            self.access_token = response_json.get('access_token')
+            cls.access_token = response_json.get('access_token')
+            cls.refresh_token = response_json.get('access_token')
+            return cls.access_token, cls.refresh_token
         else:
-            raise Exception()
+            raise OAuth2Error(response_json.get('error'), response_json.get('error_description'))
 
     def get(self, url: str) -> requests.Response:
         return requests.get(f'{self.base}{url}', auth=BearerTokenAuth(self.access_token))
