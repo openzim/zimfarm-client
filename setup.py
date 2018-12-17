@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="zimfarm",
-    version="0.0.2",
+    version="0.0.9",
     author="Chris Li",
     author_email="chris@kiwix.com",
     description="Zimfarm Client",
@@ -14,6 +14,9 @@ setuptools.setup(
     url="https://github.com/openzim/zimfarm-client",
     install_requires=["requests>=2.21.0"],
     packages=setuptools.find_packages(),
+    entry_points={
+        'console_scripts': ['zimfarm=zimfarm.commands:main'],
+    },
     classifiers=[
         "Development Status :: 1 - Planning",
         "Intended Audience :: Developers",
