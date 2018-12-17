@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="zimfarm",
-    version="0.0.9",
+    version="0.0.10",
     author="Chris Li",
     author_email="chris@kiwix.com",
     description="Zimfarm Client",
